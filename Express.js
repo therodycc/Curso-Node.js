@@ -7,7 +7,7 @@ app.set("views", __dirname + "/views");
 
 /*recordar que cuando nosotros subamos nuestra pagina a 
 un hosting este nos proporcionará un numero de puerto*/
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.use(express.static(__dirname + "/public"));
 
