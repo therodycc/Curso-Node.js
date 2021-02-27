@@ -4,7 +4,8 @@
   "description": "",
   "main": "Comidas.js",
   "scripts": {
-    "start": "node Express"
+    "start": "node Express",
+    "dev":"nodemon Express"
   },
   "keywords": [],
   "author": "",

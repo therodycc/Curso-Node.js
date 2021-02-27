@@ -13,15 +13,9 @@ const port = process.env.PORT || 3000;
 
 app.use(express.static(__dirname + "/public"));
 
-app.get('/', (req, res) => {
-    //res.send('Mi respuesta desde express');
-    res.render('index', { titulo: 'mi titulo dinamico' });
-});
-
-app.get('/services', (req, res) => {
-    // res.send('estas en la pagina de servicios');
-    res.render('services', { tituloservices: 'Page de servicios' });
-})
+/*rutas web */
+app.use('/', require('./router/Rutasweb'));
+app.use('/mascotas', require('./router/mascotas'))
 
 
 /*este archivo va a abrir cuando no encuentre ninguna ruta */
@@ -29,7 +23,7 @@ app.use((req, res, next) => {
     // res.status(404).sendFile(__dirname + "/public/404.html");
     res.status(404).render('404', {
         titulo404: '404',
-        descripcion: 'no se encontró nada'
+        descripcion: 'No se encontró nada'
     });
 })
 
