@@ -1,40 +1,42 @@
 <%- include('Templates/cabecera',{tituloweb:'Page Inicio'}) %>
-    <div class="container section-contenido">
+<div class="container section-contenido">
+    <form class="form-inline">
+        <input class="form-control mr-sm-2" type="text" placeholder="Id" />
+        <input class="form-control mr-sm-2" type="text" placeholder="Nombre" />
+        <input class="form-control mr-sm-2" type="text" placeholder="Descripción" />
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+            Agregar
+        </button>
+    </form>
 
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">id</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Descripcion</th>
-                    <th scope="col">Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% if (arraymascotas.length> 0) { %> <% arraymascotas.forEach(element=> { %>
-                        <tr>
-                            <td>
-                                <%=element.id%>
-                            </td>
-                            <td>
-                                <%=element.nombre%>
-                            </td>
-                            <td>
-                                <%=element.descripcion%>
-                            </td>
-                            <td>
-                                <a href="" class="btn btn-info">
-                                    <i class="far fa-edit"></i>
-                                </a>
-                                <a href="" class="btn btn-danger">
-                                    <i class="far fa-trash-alt"></i>
-                                </a>
-                            </td>
-                        </tr>
-                        <% }) %>
-                            <% } %>
-            </tbody>
-        </table>
-    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">id</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Descripcion</th>
+                <th scope="col">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% if (arraymascotas.length> 0) { %> <% arraymascotas.forEach(element=> {
+    %>
+            <tr>
+                <td><%=element.id%></td>
+                <td><%=element.nombre%></td>
+                <td><%=element.descripcion%></td>
+                <td>
+                    <a href="" class="btn btn-info">
+                        <i class="far fa-edit"></i>
+                    </a>
+                    <a href="" class="btn btn-danger">
+                        <i class="far fa-trash-alt"></i>
+                    </a>
+                </td>
+            </tr>
+            <% }) %> <% } %>
+        </tbody>
+    </table>
+</div>
 
-    <%- include('Templates/footer',{footerweb:'Footer inicio'}) %>
+<%- include('Templates/footer',{footerweb:'Footer inicio'}) %>

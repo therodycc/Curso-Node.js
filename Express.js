@@ -1,6 +1,26 @@
 const express = require('express');
 const app = express();
 
+//conexion a base de datos
+const mongoose = require('mongoose');
+
+const user =  'Therodycc';
+const password = 'JwgpEnLee2ccxbyE';
+const BDname = 'Veterinaria';
+const uri = `mongodb+srv://${user}:${password}@cluster0.fqqxy.mongodb.net/${BDname}?retryWrites=true&w=majority`; 
+
+
+
+mongoose.connect(uri, 
+{
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+})
+
+.then(()=>console.log('Base de datos conectada'))
+.catch(e => console.log(e))
+
+
 /*motor de plantillas  */
 app.set("view engine", "ejs");
 app.set("views", __dirname + "/views");
@@ -15,7 +35,7 @@ app.use(express.static(__dirname + "/public"));
 
 /*rutas web */
 app.use('/', require('./router/Rutasweb'));
-app.use('/mascotas', require('./router/mascotas'))
+app.use('/mascotas', require('./router/mascotas'));
 
 
 /*este archivo va a abrir cuando no encuentre ninguna ruta */

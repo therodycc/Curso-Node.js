@@ -1,7 +1,17 @@
 const express = require('express');
 const router = express.Router();
 
-router.get('/', (req, res) =>{
+const Mascota = require('../models/mascota');
+
+router.get('/', async(req, res) =>{
+
+    try {
+        const ArrayMascotasDB = await Mascota.find();
+        console.log(ArrayMascotasDB);
+
+    } catch (error) {
+        console.log(error);
+    }
     res.render('mascotas', {
         arraymascotas:[
             {id:'1', nombre:'rex',descripcion:' rex descripcion' },
