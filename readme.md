@@ -118,6 +118,10 @@ Uso de cada una de estas variables
 
     *  Aqui asignamos los codigos que ejecutan nuestro entorno de node para que cuando subamos nuestra web a un hosting este lo ejecute y podamos visualizar la pagina
 
+    > Con el comando npm run nombre_varible 
+
+    Con esto ejecutamos cualquiera de los scripts que creemos 
+
 * keywords 
 
     * 
@@ -143,6 +147,9 @@ Estas dependencias son como librerias que nos ayudana realizar cosas con mas fac
 
 > npm install nombre_de_la_dependencia
 
+
+algo que debemos de hacer es introducir el nombre de esta carpeta en un **.gitignore**  para que cuando subamos nuestra pagina a un hosting no se nos suban estos archivos
+* Ya que estos se instalan cuando subimos nuestra pagina a heroku
 # Servidor HTTP
 
 ``` javascript
@@ -289,6 +296,23 @@ es decir que cuanod el status sea el 404 responda con el archivo 404
 
 > Algo que debemos de tomar muy en cuenta es que esta ruta del status 404 debemos siempre de ponerla debajo para que la muestre si no despues que haya revisado todos los documentos y vea que no esté ya que si la ponemos de primero aunque la ruta exista nos las va a llamar
 
+## Trabajando con Ejs
+
+pero como es con ejs debemos de cambiar el **sendfile** por el **render** 
+* Pasandole el nombre del archivo
+* Y luego lo que contendrá adentro 
+
+De esta forma: 
+
+```javascript
+app.use((req, res, next) => {
+    // res.status(404).sendFile(__dirname + "/public/404.html");
+    res.status(404).render('404', {
+        titulo404: '404',
+        descripcion: 'No se encontró nada'
+    });
+})
+```
 
 # Vistas
 
@@ -336,9 +360,157 @@ app.get('/', (req, res) => {
     
     ```
 
+# Templates
+
+Esto lo usamos para no tener que estar repitiendo elementos que vamos a estar usando constantemente
+* Dentro de la carpeta de views creamos una carpeta llamada templates 
+
+Donde estos van a tener los include
+> Es decir que nosotros podemos cortar pedazos de html para incluirlos cada vez que lo necesitemos
+
+```javascript
+<%- include('template/cabecera', {tituloweb: 'Inicio EJS'}); %>
+```
+Con este codigo llamamos nuestro pedazo de codigo ya realizado Donde primero le pasamos la ubicacion del archivo y luego los parametros que queramos pasarles
+
+> Y usamos el guion medio  ya que este va a decifrar algun codigo en html
+
+# llamado de archivos de la carpeta public
+
+Como ya hemos configurado la carpeta public solo necesitamos llamar la carpeta de css y el nombre del archivo
+**Ejemplo**
+```html
+  <link rel="stylesheet" href="./css/estilos.css">
+```
+
+# Subiendo mi pagina a Heroku
+
+lo primero que debemos de hacer es registrarnos en la pagina de heroku
+
+> [heroku link page](https://dashboard.heroku.com/apps)
 
 
+luego de crear nuestro proyecto tenemos que elegir entre las opciones que nos da heroku para subir nuestro proyecto 
 
+>**Debemos de tener conocimientos en lo que es GIT**
+
+
+* heroku git 
+  
+  * Si vamos a usar heroku git, tenemos que instalar heroku CLI [link de descarga heroku CLI](https://devcenter.heroku.com/articles/heroku-cli) 
+  * Despues de instalarlo lo mas recomendable es que reiniciemos nuestra pc
+
+  * lo primero que debemos de hacer es un 
+  ```
+  heroku login
+  git init
+  heroku git:remote -a nombre-de-su-proyecto
+  git add .
+  git commit -am "make it better"
+  git push heroku master
+
+* github 
+
+* Container registry
+
+
+# Router Express
+
+Esto sirve para nosotros ordenar todas nuestras rutas
+
+ * lo primero que debemos de hacer es crear una carpeta llamada router 
+
+ Creamos un archivo.js 
+    
+* Debemos importar lo que es nuestro require del router el cual está incluido en express
+
+```javascript
+    const express = require('express');
+    const router = express.Router();
+
+/*Antes*/--------------------------------------
+
+app.get('/', (req, res) => {
+    //res.send('Mi respuesta desde express');
+    res.render('index', { titulo: 'mi titulo dinamico' });
+});
+
+/*Despues (Forma correcta)*/-------------------
+
+router.get('/', (req, res) => {
+    //res.send('Mi respuesta desde express');
+    res.render('index', { titulo: 'mi titulo dinamico' });
+});
+
+
+``` 
+
+* Luego debemos exportar la varible router 
+
+```javascript
+module.exports = router;
+```
+
+Y en nuestro archivo de app.js yo lo tengo llamado express.js aqui nosotros llamamos dicha ruta de la siguiente forma 
+
+**Ejemplos**
+
+```javascript
+app.use('/', require('./router/Rutasweb'));
+
+app.use('/mascotas', require('./router/mascotas'));
+```
+
+Para crear una nueva ruta a un nuevo archivo creamo nuestro archivo dentro de la ruta llamado mascotas.js o como le queramos llamar 
+ * Creamos nuestra varible router 
+```javascript
+const express = require('express');
+const router = express.Router();
+
+router.get('/', async(req, res) =>{
+
+    try {
+        const ArrayMascotasDB = await Mascota.find();
+        console.log(ArrayMascotasDB);
+
+    } catch (error) {
+        console.log(error);
+    }
+    res.render('mascotas', {
+        arraymascotas:[
+            {id:'1', nombre:'rex',descripcion:' rex descripcion' },
+            {id:'2', nombre:'rambo',descripcion:' rambo descripcion' },
+            {id:'3', nombre:'hax',descripcion:' hax descripcion' },
+        ]
+    })
+})
+```
+
+donde creamos nuestra ruta para mascotas donde despues en el res.render ponemos el nombre de nuestro archivo que el cliente verá y luego de estos las varibles que contendrá
+
+* Y hacemos el llamado desde el **app**
+
+```javascript
+app.use('/mascotas', require('./router/mascotas'));
+```
+
+
+> Y las ventajas son que nosotros vamos a tener nuestras rutas mas organizadas ya que vamos a usar el post, get, delete, etc...
+
+# Conexion a MongoDB
+
+Esta tiene una opcion para tener nuestros datos en la nube 
+* Le damos donde dice probar de forma gratuita
+
+* Y nos registramos 
+
+* Esta no la tenemos que subir a nuestro servidor ya que está en la nube y es accedida desde nuestro hosting ya que está en la nube
+
+> Contruimos un cluster gratis
+
+Luego debemos de instalar mongoosse que es una forma sencilla de establecer conexión con MongoDB.
+
+> npm i mongoose
 
 
 
