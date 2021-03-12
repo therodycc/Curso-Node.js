@@ -7,14 +7,17 @@ router.get('/', async(req, res) =>{
 
     try {
         const ArrayMascotasDB = await MascotaModel.find();
-        console.log(ArrayMascotasDB);
         res.render('mascotas', {
-            arraymascotas: ArrayMascotasDB
-    /*             {id:'1', nombre:'rex',descripcion:' rex descripcion' },
-                {id:'2', nombre:'rambo',descripcion:' rambo descripcion' },
-                {id:'3', nombre:'hax',descripcion:' hax descripcion' }, */
-            
+
+         arraymascotas:ArrayMascotasDB
+
+            /*arraymascotas: [
+            {id:'1', Nombre:'rex',Descripcion:' rex Descripcion' },
+                {id:'2', Nombre:'rambo',Descripcion:' rambo Descripcion' },
+                {id:'3', Nombre:'hax',Descripcion:' hax Descripcion' },]
+             */
         })
+        console.log(ArrayMascotasDB)
 
     } catch (error) {
         console.log(error);

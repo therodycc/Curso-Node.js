@@ -9,6 +9,6 @@ const MascotaSchema = new Schema({
 
 //Crear modelo
 
-const MascotaModel = mongoose.model('MascotaModel',MascotaSchema);
+const MascotaModel = mongoose.model('Perros',MascotaSchema);
 
 module.exports = MascotaModel;
