@@ -3,12 +3,12 @@ const Schema = mongoose.Schema;
 
 
 const MascotaSchema = new Schema({
-    nombre:String,
-    descripcion:String
+    Nombre:String,
+    Descripcion:String
 })
 
 //Crear modelo
 
-const Mascota = mongoose.model('Mascota',MascotaSchema);
+const MascotaModel = mongoose.model('MascotaModel',MascotaSchema);
 
-module.exports = Mascota;
+module.exports = MascotaModel;

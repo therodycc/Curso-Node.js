@@ -52,17 +52,17 @@
                 </tr>
             </thead>
             <tbody>
-                <% if (arraymascotas.length> 0) { %> <% arraymascotas.forEach(element=> {
-                        %>
+                <% if (arraymascotas.length> 0) { %>
+                     <% arraymascotas.forEach(element=> {%>
                         <tr>
                             <td>
-                                <%=element.id%>
+                                <%= element.id %>
                             </td>
                             <td>
-                                <%=element.nombre%>
+                                <%= element.Nombre %>
                             </td>
                             <td>
-                                <%=element.descripcion%>
+                                <%= element.Descripcion %>
                             </td>
                             <td>
                                 <a href="" class="btn btn-info">
@@ -74,7 +74,7 @@
                             </td>
                         </tr>
                         <% }) %>
-                            <% } %>
+                <% } %>
             </tbody>
         </table>
     </div>

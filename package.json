@@ -1,8 +1,8 @@
 {
-  "name": "Fundamentos",
+  "name": "CURSO-NODE.JS",
   "version": "1.0.0",
-  "description": "",
-  "main": "Comidas.js",
+  "description": "Node.js es un entorno en tiempo de ejecución multiplataforma, de código abierto, para la capa del servidor (pero no limitándose a ello) basado en el lenguaje de programación JavaScript.",
+  "main": "express.js",
   "scripts": {
     "start": "node Express",
     "dev": "nodemon Express"
@@ -14,6 +14,16 @@
     "cowsay": "^1.4.0",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
-    "mongoose": "^5.11.18"
-  }
+    "mongodb": "^3.6.4",
+    "mongoose": "^5.12.0",
+    "nodemon": "^2.0.7"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/therodycc/Curso-Node.js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/therodycc/Curso-Node.js/issues"
+  },
+  "homepage": "https://github.com/therodycc/Curso-Node.js#readme"
 }

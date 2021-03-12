@@ -4,12 +4,10 @@ const app = express();
 //conexion a base de datos
 const mongoose = require('mongoose');
 
-const user =  'Therodycc';
-const password = 'JwgpEnLee2ccxbyE';
-const BDname = 'Veterinaria';
+const user =  'therodycc';
+const password = 'wu2Y71gfyz058mp9';
+const BDname = 'Veet';
 const uri = `mongodb+srv://${user}:${password}@cluster0.fqqxy.mongodb.net/${BDname}?retryWrites=true&w=majority`; 
-
-
 
 mongoose.connect(uri, 
 {
@@ -21,7 +19,7 @@ mongoose.connect(uri,
 .catch(e => console.log(e))
 
 
-/*motor de plantillas  */
+/*motor de plantillas de vistas */
 app.set("view engine", "ejs");
 app.set("views", __dirname + "/views");
 
